@@ -8,6 +8,7 @@
 int main(int argc, char *argv[])
 {
         FILE *ficAformatter = NULL;
+        FILE *ficOut = NULL;
         char *line = NULL;
         size_t n = BUFFER_TEXTE_MAX;
         activeAffichageUTF8DansLaConsole(false);
@@ -19,17 +20,25 @@ int main(int argc, char *argv[])
                 printf("Erreur ouverture de %s en mode \"r\"\n", FIC_INPUT);
                 return -1;
         }
+        
+        if (!(ficOut = fopen(FIC_OUT, "w")))
+        {
+                printf("Erreur ouverture %s en mode w \n");
+        }
 
         while (my_getline(&line, &n, ficAformatter) != -1)
         {
-                printf("%s", line);
-                if (!formateTAGmySend(line))
+                
+
+                if (!formateTAGmySend(ficOut, line))
                 {
                         printf("Erreur formatTAGmySend()\n");
                         return -1;
                 }
         }
-        printf("!!SUCCESS FULL!!");
+        printf("\n!!SUCCESS FULL!!\n");
+
+        fclose(ficOut);
         fclose(ficAformatter);
 
         getchar();

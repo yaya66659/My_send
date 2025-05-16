@@ -105,21 +105,13 @@ bool tagValide(const char *tag)
     return true;
 }
 
-bool formateTAGmySend(const char *line)
+bool formateTAGmySend(FILE *ficFormater, const char *line)
 {
     char *ptr1 = NULL;
     char *ptr2 = NULL;
     char *ptr3 = NULL;
     char *output = NULL;
     char *tag = NULL;
-    FILE *ficFormater = NULL;
-
-    // on ouvre le fichier .result en écriture ajout fin de fichier
-    if (!(ficFormater = fopen(FIC_OUT, "a")))
-    {
-        printf("Erreur ouverture : %s en mode \"a\"\n", FIC_OUT);
-        return false;
-    }
 
     // ptr1 point sur le début de la ligne
     ptr1 = (char *)line;
@@ -171,7 +163,7 @@ bool formateTAGmySend(const char *line)
             {
                 return false;
             }
-            //on fait pointer ptr1 sur le reste de la ligne
+            // on fait pointer ptr1 sur le reste de la ligne
             ptr1 = ptr2;
             break;
         }
@@ -184,10 +176,10 @@ bool formateTAGmySend(const char *line)
         {
             return false;
         }
-       
-         //on fait pointer ptr1 sur le reste de la ligne
+
+        // on fait pointer ptr1 sur le reste de la ligne
         ptr1 = ptr3 + END_TAG_LEN;
-         // on continue de chercher des END_TAG dans ptr1 jusqua que ptr3 = NULL
+        // on continue de chercher des END_TAG dans ptr1 jusqua que ptr3 = NULL
     }
     // on concat  la ligne pointer par ptr1 si pas de START_TAG trouvée ou  de END_START seul
     if (!catString(ficFormater, &output, ptr1, strlen(ptr1)))
@@ -195,6 +187,6 @@ bool formateTAGmySend(const char *line)
         return false;
     }
 
-    fclose(ficFormater);
+    free(output);
     return true;
 }

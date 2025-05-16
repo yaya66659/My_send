@@ -29,6 +29,6 @@ void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie);
 bool catString(FILE *fic, char **str1, char *str2, size_t n);
 bool formateTAG(const char *line);
 bool tagValide(const char *tag);
-bool formateTAGmySend(const char *line);
+bool formateTAGmySend(FILE * ficFormater, const char *line);
 
 #endif /*FCT_15052025_232234_my_send_H*/
