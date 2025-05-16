@@ -171,11 +171,25 @@ bool formateTAGmySend(const char *line)
             {
                 return false;
             }
+            //on fait pointer ptr1 sur le reste de la ligne
             ptr1 = ptr2;
             break;
         }
     }
-    // on concat  la ligne pointer par ptr1 si pas de START_TAG trouvée
+    // si il ya un END_TAG dans ptr1 sans START_TAG  on pointe dessus avec ptr3
+    while (ptr3 = strstr(ptr1, END_TAG))
+    {
+        // on concat INVALID_TAG a la place
+        if (!catString(ficFormater, &output, REPLACE_TAG_INVALID, REPLACE_TAG_INVALID_LEN))
+        {
+            return false;
+        }
+       
+         //on fait pointer ptr1 sur le reste de la ligne
+        ptr1 = ptr3 + END_TAG_LEN;
+         // on continue de chercher des END_TAG dans ptr1 jusqua que ptr3 = NULL
+    }
+    // on concat  la ligne pointer par ptr1 si pas de START_TAG trouvée ou  de END_START seul
     if (!catString(ficFormater, &output, ptr1, strlen(ptr1)))
     {
         return false;
