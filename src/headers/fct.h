@@ -15,6 +15,6 @@ void videBuffer(void);
 void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie);
 bool catString(char **str1, char *str2, size_t n);
 bool formateTAG(const char *line);
-char * ligneAformatter
+
 
 #endif /*FCT_15052025_232234_my_send_H*/
