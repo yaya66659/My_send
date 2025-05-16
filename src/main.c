@@ -4,24 +4,34 @@
 #include <stdlib.h>
 
 #include "headers/fct.h"
+#include "headers/getLine.h"
 int main(int argc, char *argv[])
 {
+        FILE *ficAformatter = NULL;
+        char *line = NULL;
+        size_t n = BUFFER_TEXTE_MAX;
         activeAffichageUTF8DansLaConsole(false);
         system("cls");
-        printf("Modèle main.c\n");
-        const char *strTAG = "PHILyoyo PHILPHILtututuyTAGoyuyPHIL   TAGPHILPHILPHIL   aaaTAGaaaaaaaaTAGPHIL";
-        printf("la chaîne de caractère : '%s'\n", strTAG);
-        printf("va être réécrite en remplacent tout les %s avec des %s sur la sortie standard stdout\n", TAG, REPLACE_TAG);
-        printf("Saisir ENTER pour formater la chaîne\n\n\n");
-        getchar();
-        if (formateTAG(strTAG))
+        printf("My_send Project\n\n");
+
+        if (!(ficAformatter = fopen(FIC_INPUT, "r")))
         {
-                printf("\nLa chaîne a étés formatée avec Succès  Saisir ENTER pour quitter\n");
+                printf("Erreur ouverture de %s en mode \"r\"\n", FIC_INPUT);
+                return -1;
         }
-        else
+
+        while (my_getline(&line, &n, ficAformatter) != -1)
         {
-                printf("\nÉCHEC du formatage\n");
+                printf("%s", line);
+                if (!formateTAGmySend(line))
+                {
+                        printf("Erreur formatTAGmySend()\n");
+                        return -1;
+                }
         }
+        printf("!!SUCCESS FULL!!");
+        fclose(ficAformatter);
+
         getchar();
 
         return 0;
