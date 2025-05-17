@@ -20,19 +20,22 @@ int main(int argc, char *argv[])
                 printf("Erreur ouverture de %s en mode \"r\"\n", FIC_INPUT);
                 return -1;
         }
-        
+
         if (!(ficOut = fopen(FIC_OUT, "w")))
         {
                 printf("Erreur ouverture %s en mode w \n");
+                fclose(ficAformatter);
+                return -1;
         }
 
         while (my_getline(&line, &n, ficAformatter) != -1)
         {
-                
 
                 if (!formateTAGmySend(ficOut, line))
                 {
                         printf("Erreur formatTAGmySend()\n");
+                        fclose(ficOut);
+                        fclose(ficAformatter);
                         return -1;
                 }
         }

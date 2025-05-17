@@ -70,10 +70,12 @@ bool formateTAG(const char *line)
 
         if (!catString(NULL, &output, ptr1, (ptr2 - ptr1)))
         {
+            free(output);
             return false;
         }
         if (!catString(NULL, &output, REPLACE_TAG, REPLACE_TAG_LEN))
         {
+            free(output);
             return false;
         }
         ptr1 = ptr2 + TAG_LEN;
@@ -81,13 +83,16 @@ bool formateTAG(const char *line)
 
     if (!catString(NULL, &output, ptr1, strlen(ptr1)))
     {
+        free(output);
         return false;
     }
 
+    free(output);
     return true;
 }
 bool tagValide(const char *tag)
 {
+   
 
     if (!tag || !tag[0])
     {
@@ -122,6 +127,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
         // on concat dans output la chaîne de ptr1 jusqu’à START_TAG
         if (!catString(ficFormater, &output, ptr1, ptr2 - ptr1))
         {
+            free(output);
             return false;
         }
         // on déplace ptr2 pour pointer a la fin du START_TAG
@@ -133,6 +139,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
             // on copie l'identifiant du TAG dans tag
             if (!catString(NULL, &tag, ptr2, ptr3 - ptr2))
             {
+                free(output);
                 return false;
             }
 
@@ -142,6 +149,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
                 // concat [toto] a la place du TAG
                 if (!catString(ficFormater, &output, REPLACE_TAG, REPLACE_TAG_INVALID_LEN))
                 {
+                    free(output);
                     return false;
                 }
                 ptr1 = ptr3 + END_TAG_LEN;
@@ -150,6 +158,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
             {
                 if (!catString(ficFormater, &output, REPLACE_TAG_INVALID, REPLACE_TAG_INVALID_LEN))
                 {
+                    free(output);
                     return false;
                 }
                 ptr1 = ptr2;
@@ -161,6 +170,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
             // si il n'y a pas de TAG_END apres le START_TAG on remplace START_TAG PAR [TAG_INVALID]
             if (!catString(ficFormater, &output, REPLACE_TAG_INVALID, REPLACE_TAG_INVALID_LEN))
             {
+                free(output);
                 return false;
             }
             // on fait pointer ptr1 sur le reste de la ligne
@@ -174,6 +184,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
         // on concat INVALID_TAG a la place
         if (!catString(ficFormater, &output, REPLACE_TAG_INVALID, REPLACE_TAG_INVALID_LEN))
         {
+            free(output);
             return false;
         }
 
@@ -184,6 +195,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
     // on concat  la ligne pointer par ptr1 si pas de START_TAG trouvée ou  de END_START seul
     if (!catString(ficFormater, &output, ptr1, strlen(ptr1)))
     {
+        free(output);
         return false;
     }
 
