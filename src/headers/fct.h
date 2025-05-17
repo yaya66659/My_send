@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 
+
 #define BUFFER_TEXTE_MAX 256
 #define BUFFER_CHEMIN_MAX 512
 
@@ -27,7 +28,11 @@
 void videBuffer(void);
 void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie);
 bool catString(FILE *fic, char **str1, char *str2, size_t n);
+
+/******fonction de test de remplacement de TAG ****************
 bool formateTAG(const char *line);
+****************************************/
+
 bool tagValide(const char *tag);
 bool formateTAGmySend(FILE * ficFormater, const char *line);
 

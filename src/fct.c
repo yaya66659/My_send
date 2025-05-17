@@ -28,19 +28,19 @@ void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie)
 bool catString(FILE *fic, char **str1, char *str2, size_t n)
 {
 
-    *str1 = (char *)realloc(*str1, n + 1);
+    *str1 = (char *)realloc(*str1, n);
     if (*str1 == NULL)
     {
         printf("ERREUR realloc\n");
         return false;
     }
-
     *str1[0] = '\0';
     if (!strncat(*str1, str2, n))
     {
         printf("Erreur strncat de catString sur str1 = %s, str2 = %s, n = %d\n", *str1, str2, n);
         return false;
     }
+
     if (fic)
     {
         if (fprintf(fic, "%s", *str1) < 0)
@@ -52,6 +52,7 @@ bool catString(FILE *fic, char **str1, char *str2, size_t n)
     return true;
 }
 
+/***********fonction de test de remplacement de tag***********************************
 bool formateTAG(const char *line)
 {
     char *ptr1 = NULL;
@@ -90,9 +91,10 @@ bool formateTAG(const char *line)
     free(output);
     return true;
 }
+******************************************************************************/
+
 bool tagValide(const char *tag)
 {
-   
 
     if (!tag || !tag[0])
     {
@@ -139,6 +141,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
             // on copie l'identifiant du TAG dans tag
             if (!catString(NULL, &tag, ptr2, ptr3 - ptr2))
             {
+                free(tag);
                 free(output);
                 return false;
             }
@@ -158,6 +161,7 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
             {
                 if (!catString(ficFormater, &output, REPLACE_TAG_INVALID, REPLACE_TAG_INVALID_LEN))
                 {
+                    free(tag);
                     free(output);
                     return false;
                 }
@@ -190,15 +194,16 @@ bool formateTAGmySend(FILE *ficFormater, const char *line)
 
         // on fait pointer ptr1 sur le reste de la ligne
         ptr1 = ptr3 + END_TAG_LEN;
-        // on continue de chercher des END_TAG dans ptr1 jusqua que ptr3 = NULL
+        // on continue de chercher des END_TAG dans ptr1 jusqu’à que ptr3 = NULL
     }
     // on concat  la ligne pointer par ptr1 si pas de START_TAG trouvée ou  de END_START seul
     if (!catString(ficFormater, &output, ptr1, strlen(ptr1)))
     {
+        free(tag);
         free(output);
         return false;
     }
-
+    free(tag);
     free(output);
     return true;
 }
