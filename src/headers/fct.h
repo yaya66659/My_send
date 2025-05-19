@@ -2,7 +2,7 @@
 #define FCT_15052025_232234_my_send_H
 
 #include <stdbool.h>
-
+#include "tagManager.h"
 
 #define BUFFER_TEXTE_MAX 256
 #define BUFFER_CHEMIN_MAX 512
@@ -10,8 +10,10 @@
 #define FIC_INPUT "exemple.txt"
 #define FIC_OUT "exemple.txt.result"
 
+/**define pour fonction de test formatTAG
 #define TAG "PHIL"
 #define TAG_LEN 4
+************************************************/
 
 #define START_TAG "[MYSEDBEGIN_"
 #define START_TAG_LEN strlen(START_TAG)
@@ -25,15 +27,11 @@
 #define REPLACE_TAG_INVALID "[TAG_INVALID]"
 #define REPLACE_TAG_INVALID_LEN strlen(REPLACE_TAG_INVALID)
 
-void videBuffer(void);
+void flushStdinBuffer(void);
 void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie);
-bool catString(FILE *fic, char **str1, char *str2, size_t n);
+bool concatString(char **dest, char *src, size_t n);
+bool isValide(const char *tag);
+bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManager_s *self);
 
-/******fonction de test de remplacement de TAG ****************
-bool formateTAG(const char *line);
-****************************************/
-
-bool tagValide(const char *tag);
-bool formateTAGmySend(FILE * ficFormater, const char *line);
 
 #endif /*FCT_15052025_232234_my_send_H*/

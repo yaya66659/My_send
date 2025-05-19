@@ -12,6 +12,9 @@
         "i3/*.conf": "i3",
         "polybar/config": "ini",
         "polybar/*.conf": "ini",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "tag.h": "c",
+        "tagmanager.h": "c",
+        "stdio.h": "c"
     }
 }

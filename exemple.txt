@@ -1,8 +1,8 @@
 [MYSEDBEGIN_TAG1_MYSEDEND]Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an[MYSEDBEGIN_TAG1_MYSEDEND]
-unknown printer took a galley of type and [MYSEDBEGIN_TAG1_MYSEDEND] scrambled it to make a type specimen book. It has
-[MYSEDBEGIN_TAG1_MYSEDEND]survived not only five [MYSEDBEGIN_TAG1_MYSEDEND] centuries, but also the leap into electronic typesetting, remaining[MYSEDBEGIN_TAG1_MYSEDEND]
-essentially unchanged. It[MYSEDBEGIN_UNKNOWTAG_MYSEDEND] was popularised in the 1960s with the release of Letraset sheets
-containing Lorem Ipsum passages, and more [MYSEDBEGIN_TAG1_MYSEDEND_MYSEDEN]recently with desktop publishing software like
-Aldus [MYSEDBEGIN_TAG1_MYSEDENDPageMaker including [MYSEDBEGIN_TAG1_MYSEDEND]versions [MYSEDBEGIN_TAG1_MYSEDEND] of Lorem Ipsum.
-test test _MYSEDEND] test test
+unknown printer took a galley of type and [MYSEDBEGIN_TAG2_MYSEDEND] scrambled it to make a type specimen book. It has
+[MYSEDBEGIN_TAG1_MYSEDEND]survived not only five [MYSEDBEGIN_TAG2_MYSEDEND] centuries, but also the leap into electronic typesetting, remaining[MYSEDBEGIN_TAG1_MYSEDEND]
+essentially unchanged. It[MYSEDBEGIN_TAG3_MYSEDEND] was popularised in the 1960s with the release of Letraset sheets
+containing [MYSEDBEGIN_TAG3_MYSEDEND] Lorem Ipsum passages, and more[MYSEDBEGIN_TAG1_MYSEDEND]recently with desktop publishing software like
+Aldus [MYSEDBEGIN_TAG3_MYSEDEND]PageMaker including [MYSEDBEGIN_UNKNOWTAG_MYSEDEND]versions [MYSEDBEGIN_TAG1_MYSEDEND] of Lorem Ipsum.
+test test [MYSEDBEGIN_TAG1_MYSEDEND] test test
