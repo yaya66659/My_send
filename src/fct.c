@@ -59,24 +59,6 @@ bool concatString(char **dest, char *src, size_t n)
     return true;
 }
 
-bool isgValide(const char *tag)
-{
-    if (!tag || !tag[0])
-    {
-        return false;
-    }
-
-    for (int i = 0; tag[i]; i++)
-    {
-        if (!isalnum(tag[i]) && tag[i] != '_')
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManager_s *self)
 {
     bool resultFonction = false;

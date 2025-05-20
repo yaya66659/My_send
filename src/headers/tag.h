@@ -3,8 +3,8 @@
 
 #include <stdbool.h>
 
-#define TAG__ID_LEN_MAX 30
-#define TAG__VALUE_LEN_MAX 256
+#define  TAG__ID_LEN_MAX  30
+#define  TAG__VALUE_LEN_MAX  256
 
 typedef struct tag
 {

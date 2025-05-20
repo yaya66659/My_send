@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "tag.h"
 
-#define TAG_MANAGER__TAG_MAX 30
+#define  TAG_MANAGER__TAG_MAX  30
 typedef struct tagManager
 {
     tag_s list[TAG_MANAGER__TAG_MAX];

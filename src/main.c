@@ -20,32 +20,32 @@ int main(void)
         tagManager_s tags;
 
         TagManager_Clear(&tags);
-        if (!TagManager_AddTag(&tags, "TAG1"))
+        if (!TagManager_AddTag(&tags, TAG1))
         {
                 goto END_MAIN_FONCTION;
         }
 
-        if (!TagManager_UpdateValue(&tags, "TAG1", "[toto]"))
+        if (!TagManager_UpdateValue(&tags, TAG1, REPLACE_TAG1))
         {
                 goto END_MAIN_FONCTION;
         }
 
-        if (!TagManager_AddTag(&tags, "TAG2"))
+        if (!TagManager_AddTag(&tags, TAG2))
         {
                 goto END_MAIN_FONCTION;
         }
 
-        if (!TagManager_UpdateValue(&tags, "TAG2", "[titi]"))
+        if (!TagManager_UpdateValue(&tags, TAG2, REPLACE_TAG2))
         {
                 goto END_MAIN_FONCTION;
         }
 
-        if (!TagManager_AddTag(&tags, "TAG3"))
+        if (!TagManager_AddTag(&tags, TAG3))
         {
                 goto END_MAIN_FONCTION;
         }
 
-        if (!TagManager_UpdateValue(&tags, "TAG3", "[yaya]"))
+        if (!TagManager_UpdateValue(&tags, TAG3, REPLACE_TAG3))
         {
                 goto END_MAIN_FONCTION;
         }
