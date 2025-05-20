@@ -76,10 +76,10 @@ bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManage
 
     do// tant que il y a un END_TAG dans ptr1 on boucle pour verifier si il ya un START_TAG devant 
     {
-        // si il ya un END_TAG dans ptr1 sans START_TAG  on stop
+        // on détecte un END_TAG et un START_TAG
         ptr3 = strstr(ptr1, END_TAG);
         ptr2 = strstr(ptr1, START_TAG);
-
+        //si END_TAG est détecté et que: il n'y a pas de START_TAG, ou que END_TAG et avant START_TAG (END_TAG seul)
         if (ptr3 && (!ptr2 || ptr3 < ptr2))
         {
             // on  stop
@@ -114,8 +114,8 @@ bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManage
                     printf("Erreur TAG:%s is invalid line %d\n", tagId, nLine);
                     goto END_FONCTION;
                 }
-                free(tagId);
-                tagId = NULL;
+                free(tagId);// on libère la mémoire allouer tagId
+                tagId = NULL;//et on le remet a NULL pour la prochaine utilisation
 
                 // Si le tag est dans la list on le remplace par sa valeur
                 if (!concatString(&output, tagValid->value, strlen(tagValid->value)))
@@ -148,7 +148,9 @@ bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManage
     }
 
     resultFonction = true;
+
 END_FONCTION:
+//Action de nettoyages
     free(tagId);
     free(output);
     return resultFonction;

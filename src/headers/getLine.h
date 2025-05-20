@@ -9,5 +9,4 @@
 // - stream  : fichier d’entrée
 // Retourne : le nombre d’octets lus (ssize_t), ou -1 en cas d’erreur.
 ssize_t my_getline(char **lineptr, size_t *n, FILE *stream);
-
 #endif /*GET_LINE_11052025_003752_mySend_H*/

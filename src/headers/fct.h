@@ -31,5 +31,4 @@ void flushStdinBuffer(void);
 void activeAffichageUTF8DansLaConsole(bool activerUTF8pourLaSaisie);
 bool concatString(char **dest, char *src, size_t n);
 bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManager_s *self);
-
 #endif /*FCT_15052025_232234_my_send_H*/

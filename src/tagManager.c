@@ -139,11 +139,3 @@ tag_s *TagManager_SearchTag(tagManager_s *self, const char *id)
 
     return NULL;
 }
-
-void TagManager_PrintListTag(tagManager_s *self)
-{
-    for (int i = 0; i < self->nbTag; i++)
-    {
-        printf("TAG numero %d: \n\tid:'%s'\n\tvalue: '%s'\n\n", i, self->list[i].id, self->list[i].value);
-    }
-}

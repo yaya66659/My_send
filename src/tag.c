@@ -41,16 +41,16 @@ bool Tag_SetValue(tag_s *self, const char *value)
     return true;
 }
 
-bool Tag_IsValidId(const char *tag)
+bool Tag_IsValidId(const char *id)
 {
-    if (!tag || !tag[0])
+    if (!id || !id[0])
     {
         return false;
     }
 
-    for (int i = 0; tag[i]; i++)
+    for (int i = 0; id[i]; i++)
     {
-        if (!isalnum(tag[i]) && tag[i] != '_')
+        if (!isalnum(id[i]) && id[i] != '_')
         {
             return false;
         }

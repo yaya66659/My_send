@@ -12,9 +12,12 @@ typedef struct tag
     char value[TAG__VALUE_LEN_MAX];
 } tag_s;
 
+//met le tag_s id et value en position correcte
 void Tag_Clear(tag_s *self);
+//modifie un id d'un tag_s
 bool Tag_SetId(tag_s *self, const char *id);
+//modifie un la value d'un tag_s
 bool Tag_SetValue(tag_s *self, const char *value);
-bool Tag_IsValidId(const char *tag);
-
+//verify si  un id est valide
+bool Tag_IsValidId(const char *id);
 #endif
