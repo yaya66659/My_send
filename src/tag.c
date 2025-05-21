@@ -15,13 +15,13 @@ bool Tag_SetId(tag_s *self, const char *id)
 {
     if (!self || strlen(id) > TAG__ID_LEN_MAX)
     {
-        printf("Erreur tag_s NULL or > TAG__ID_LEN_MAX(%d)\n", TAG__ID_LEN_MAX);
+        fprintf(stderr, "Erreur tag_s NULL or > TAG__ID_LEN_MAX(%d)\n", TAG__ID_LEN_MAX);
         return false;
     }
 
     if (!Tag_IsValidId(id))
     {
-        printf("Tag_SetId id invalid '%s'\n", id);
+       fprintf(stderr, "Tag_SetId id invalid '%s'\n", id);
         return false;
     }
 
@@ -33,7 +33,7 @@ bool Tag_SetValue(tag_s *self, const char *value)
 {
     if (!self || strlen(value) > TAG__VALUE_LEN_MAX)
     {
-        printf("Erreur tag_s NULL or > TAG__VALUE_LEN_MAX(%d)\n", TAG__VALUE_LEN_MAX);
+        fprintf(stderr, "Erreur tag_s NULL or > TAG__VALUE_LEN_MAX(%d)\n", TAG__VALUE_LEN_MAX);
         return false;
     }
 

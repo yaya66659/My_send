@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include <errno.h>
 #include <ctype.h>
 
 #include "headers/fct.h"
@@ -33,7 +34,7 @@ bool concatString(char **dest, char *src, size_t n)
         *dest = malloc(n + 1);
         if (!*dest)
         {
-            printf("catString Erreur malloc\n");
+            fprintf(stderr, "catString Erreur malloc (%s)\n", stderror(errno));
             return false;
         }
         *dest[0] = '\0';
@@ -43,7 +44,7 @@ bool concatString(char **dest, char *src, size_t n)
         destTmp = realloc(*dest, strlen(*dest) + n + 1);
         if (destTmp == NULL)
         {
-            printf("ERREUR realloc\n");
+            fprintf(stderr, "ERREUR realloc (%s)\n", stderror(errno));
             return false;
         }
         *dest = destTmp;
@@ -51,7 +52,7 @@ bool concatString(char **dest, char *src, size_t n)
 
     if (!strncat(*dest, src, n))
     {
-        printf("Erreur strncat de concatString sur str1 = %s, str2 = %s, n = %d\n", dest, src, n);
+        fprintf(stderr, "Erreur strncat de concatString sur str1 = %s, str2 = %s, n = %d\n", dest, src, n);
         return false;
     }
 
@@ -73,23 +74,23 @@ bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManage
     // ptr1 point sur le début de la ligne
     ptr1 = (char *)line;
 
-    do// tant que il y a un END_TAG dans ptr1 on boucle pour verifier si il ya un START_TAG devant 
+    do // tant que il y a un END_TAG dans ptr1 on boucle pour verifier si il ya un START_TAG devant
     {
         // on détecte un END_TAG et un START_TAG
         ptr3 = strstr(ptr1, END_TAG);
         ptr2 = strstr(ptr1, START_TAG);
-        //si END_TAG est détecté et que: il n'y a pas de START_TAG, ou que END_TAG et avant START_TAG (END_TAG seul)
+        // si END_TAG est détecté et que: il n'y a pas de START_TAG, ou que END_TAG et avant START_TAG (END_TAG seul)
         if (ptr3 && (!ptr2 || ptr3 < ptr2))
         {
             // on  stop
-            printf("Erreur END_TAG seul détecté line %d\n", nLine);
+            fprintf(stderr, "Erreur END_TAG seul détecté line %d\n", nLine);
             goto END_FONCTION;
         }
 
         // tant que on trouve un START_TAG dans la ligne ptr1 et que il n'y a pas de END_TAG seul avant  on point le Début du START_TAG dans ptr2
         while ((ptr2 = strstr(ptr1, START_TAG)) && !((ptr3 = strstr(ptr1, END_TAG)) < ptr2))
         {
-           // on concat dans output la chaîne de ptr1 jusqu’à START_TAG
+            // on concat dans output la chaîne de ptr1 jusqu’à START_TAG
             if (!concatString(&output, ptr1, ptr2 - ptr1))
             {
                 goto END_FONCTION;
@@ -110,11 +111,11 @@ bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManage
                 tagValid = TagManager_SearchTag(self, tagId);
                 if (!tagValid)
                 {
-                    printf("Erreur TAG:%s is invalid line %d\n", tagId, nLine);
+                    fprintf(stderr, "Erreur TAG:%s is invalid line %d\n", tagId, nLine);
                     goto END_FONCTION;
                 }
-                free(tagId);// on libère la mémoire allouer tagId
-                tagId = NULL;//et on le remet a NULL pour la prochaine utilisation
+                free(tagId);  // on libère la mémoire allouer tagId
+                tagId = NULL; // et on le remet a NULL pour la prochaine utilisation
 
                 // Si le tag est dans la list on le remplace par sa valeur
                 if (!concatString(&output, tagValid->value, strlen(tagValid->value)))
@@ -127,11 +128,11 @@ bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManage
             else
             {
                 // si il n'y a pas de TAG_END apres le START_TAG on stop
-                printf("Erreur TAG non fermer line %d\n", nLine);
+                fprintf(stderr, "Erreur TAG non fermer line %d\n", nLine);
                 goto END_FONCTION;
             }
         }
-    } while (ptr3 = strstr(ptr1, END_TAG));// tant que il y a un END_TAG dans ptr1 on boucle pour verifier si il ya un START_TAG devant 
+    } while (ptr3 = strstr(ptr1, END_TAG)); // tant que il y a un END_TAG dans ptr1 on boucle pour verifier si il ya un START_TAG devant
 
     // on concat  la ligne pointer par ptr1 si pas de START_TAG trouvée ou  de END_START seul
     if (!concatString(&output, ptr1, strlen(ptr1)))
@@ -142,14 +143,14 @@ bool formateTAGmySend(FILE *ficOut, const char *line, const int nLine, tagManage
     // on écrit output dans le fichier de sortie
     if (fprintf(ficOut, "%s", output) < 0)
     {
-        fprintf(ficOut, "Erreur écriture de %s dans %s\n", output, FIC_OUT);
+        fprintf(stderr, "Erreur (%s)\nécriture de %s dans %s\n", stderror(errno), output, FIC_OUT);
         goto END_FONCTION;
     }
 
     resultFonction = true;
 
 END_FONCTION:
-//Action de nettoyages
+    // Action de nettoyages
     free(tagId);
     free(output);
     return resultFonction;

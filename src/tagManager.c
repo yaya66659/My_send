@@ -24,13 +24,13 @@ bool TagManager_AddTag(tagManager_s *self, const char *id)
     Tag_Clear(&newTag);
     if (!self)
     {
-        printf("TagManager_AddTag tagManager_s = NULL");
+        fprintf(stderr, "TagManager_AddTag tagManager_s = NULL");
         return false;
     }
 
     if (self->nbTag + 1 > TAG_MANAGER__TAG_MAX)
     {
-        printf("TagManager_AddTag nbTag > %d\n", TAG_MANAGER__TAG_MAX);
+        fprintf(stderr, "TagManager_AddTag nbTag > %d\n", TAG_MANAGER__TAG_MAX);
         return false;
     }
 
@@ -41,7 +41,7 @@ bool TagManager_AddTag(tagManager_s *self, const char *id)
 
     if (TagManager_SearchTag(self, id) != NULL)
     {
-        printf("TagManager_AddTag id '%s' exist\n", id);
+        fprintf(stderr, "TagManager_AddTag id '%s' exist\n", id);
         return false;
     }
 
@@ -62,7 +62,7 @@ bool TagManager_RemoveTag(tagManager_s *self, const char *id)
 
     if (!(tag = TagManager_SearchTag(self, id)))
     {
-        printf("TagManager_RemoveTag tag id '%s' is not here\n", id);
+        fprintf(stderr, "TagManager_RemoveTag tag id '%s' is not here\n", id);
         return false;
     }
     // Si le tag est dans list on le met dans une situation correcte et on l'alterne avec le dernier tag avant de diminuer le nombre de tag de 1
@@ -81,13 +81,13 @@ bool TagManager_UpdateValue(tagManager_s *self, const char *id, const char *valu
 
     if (!self)
     {
-        printf("TagManager_UpdateValue tagManager_s = NULL");
+        fprintf(stderr, "TagManager_UpdateValue tagManager_s = NULL");
         return false;
     }
 
     if (!(tag = TagManager_SearchTag(self, id)))
     {
-        printf("TagManager_UpdateValue id: '%s' not here", id);
+       fprintf(stderr, "TagManager_UpdateValue id: '%s' not here", id);
         return false;
     }
 

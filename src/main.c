@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 #include "headers/fct.h"
 #include "headers/getLine.h"
@@ -9,7 +10,7 @@
 #include "headers/tagManager.h"
 
 int main(void)
-{       
+{
         int resultMainFonction = 1;
         FILE *ficAformatter = NULL;
         FILE *ficOut = NULL;
@@ -53,13 +54,13 @@ int main(void)
         printf("My_send Project\n\n");
         if (!(ficAformatter = fopen(FIC_INPUT, "r")))
         {
-                printf("Erreur ouverture de %s en mode \"r\"\n", FIC_INPUT);
+                fprintf(stderr, "Erreur (%s)\n ouverture de %s en mode \"r\"\n", stderror(errno), FIC_INPUT);
                 goto END_MAIN_FONCTION;
         }
 
         if (!(ficOut = fopen(FIC_OUT, "w")))
         {
-                printf("Erreur ouverture %s en mode w \n", FIC_OUT);
+                fprintf(stderr, "Erreur (%s)\nouverture %s en mode w \n", stderror(errno), FIC_OUT);
                 goto END_MAIN_FONCTION;
         }
 
@@ -73,7 +74,7 @@ int main(void)
         }
 
         resultMainFonction = 0;
-        printf("\n!!SUCCESS FULL!!\n");
+        printf("!!SUCCESS FULL!!\n");
 
 END_MAIN_FONCTION:
 
