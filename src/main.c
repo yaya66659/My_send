@@ -1,4 +1,3 @@
-
 // -*- coding: utf-8 -*-
 #include <stdio.h>
 #include <stdlib.h>
