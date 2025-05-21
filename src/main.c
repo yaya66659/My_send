@@ -88,10 +88,5 @@ END_MAIN_FONCTION:
                 fclose(ficOut);
         }
         free(line);
-        getchar();
-
-        if (resultMainFonction == 1)
-        {
-        }
         return resultMainFonction;
 }
